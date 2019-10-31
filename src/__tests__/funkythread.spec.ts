@@ -33,30 +33,25 @@ describe('Funkythread Library', () => {
 
   it('must return the correct value given a different function name', async () => {
     const result = await runFunctionAsThread(function other_function_name() {
-      return 123;
+      return 12;
     }) as any;
 
-    expect(result).toEqual(123);
+    expect(result).toEqual(12);
   });
 
-  it('must strip out promises; promises do not work', async () => {
-    const result = await runFunctionAsThread(() => {
-      function fibo(n: number): number {
-        if (n < 2) { return 1; }
-        return fibo(n - 2) + fibo(n - 1);
-      }
+  it('should parse args correctly and pass them into the run function', async () => {
+    const result = await runFunctionAsThread(function run(args: any[]) {
+      return args[0];
+    }, 456) as any;
 
-      return new Promise((resolve) => resolve(fibo(25))); // boxer and unboxer will strip this down
-    });
-
-    expect(result).toEqual({});
+    expect(result).toEqual(456);
   });
 
-  it('should not work when passed an async handler function', async () => {
+  it('should work when passed an async handler function', async () => {
     const result = await runFunctionAsThread(async function run() {
-      return 123; // ordinarily this would return 123, but async = promise = object = sanitized
+      return 789;
     }) as any;
 
-    expect(result).toEqual({}); // this is what is left when the promise is stripped down by the boxer and unboxer
+    expect(result).toEqual(789); // this is what is left when the promise is stripped down by the boxer and unboxer
   });
 });

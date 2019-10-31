@@ -4,6 +4,8 @@
 
 A simple library for running a CPU-intensive sync function inside a worker thread without having to create a module. This library leverages dynamic code evaluation (via `new Function`) to allow you to pass a function and have it dynamically evaluated inside another thread. All evaluation logic happens inside the other thread, so there is little performance loss.
 
+This is a very basic library with limited features. 
+
 ## Installation and Usage
 
 **This module requires that you use v11.0.0+ to leverage the currently experimental features of worker threads.**
@@ -46,7 +48,9 @@ console.log(result); // 123
 
 3. This library makes no attempt to create a thread pool or scheduler.
 
-4. Worker thread has no shared memory with the main thread.
+4. Worker thread has no shared memory with the main thread. This effectively means that you cannot `require` something in the main thread and import it into the worker thread. This library is intended for pure functions without external dependencies.
+
+5. You cannot pass functions across the `MessagePort` (from main to worker or worker to main). Functionality for passing more functions other than the run function will be added in a future release. For now, this is a very basic library.
 
 ## Contributing
 If you would like to contribute to this project, feel free to do so on Github by:
