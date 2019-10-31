@@ -1,3 +1,4 @@
+import { isArrowFunctionExpression, isFunctionExpression } from '@babel/types';
 import { isFunction, isObject } from 'util';
 import { parentPort, workerData } from 'worker_threads';
 
@@ -11,22 +12,12 @@ export async function runTask() {
     // note: syntax/logic errors with user function will show up as this line.
     const run = new Function(`return (${workerData.fn})(${args.join(',')})`) as any;
     const result = await run();
-    return await buildResponse(result);
+    return await result;
   })();
 }
 
 async function buildResponse(data: any): Promise<any> {
-  if (isFunction(data)) {
-    return JSON.stringify(await data(), (key, value) => {
-      if (isFunction(value)) {
-        return buildResponse(value());
-      } else {
-        return value;
-      }
-    });
-  } else {
-    return data;
-  }
+  return data;
 }
 
 function revive(args: any[]): any[] {
@@ -34,18 +25,13 @@ function revive(args: any[]): any[] {
   for (const arg of args) {
     try {
       const obj = JSON.parse(arg, (key, value) => {
-        if (typeof value === 'string' && (value.includes('function') || value.includes('() =>'))) {
-          return new Function(`return (${value})`);
-        } else {
-          return value;
-        }
+        return (new Function(`return (${value})`))(); // box and unbox
       });
-      ret.push(obj);
+      ret.push(obj());
     } catch (e) {
       ret.push(arg);
     }
   }
-
   return ret;
 }
 

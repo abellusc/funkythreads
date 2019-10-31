@@ -54,4 +54,14 @@ describe('Funkythread Library', () => {
 
     expect(result).toEqual(789); // this is what is left when the promise is stripped down by the boxer and unboxer
   });
+
+  it('should let me pass a function as an arg and call it later, returning a simple type', async () => {
+    const result = await runFunctionAsThread(function run(...args: any[]) {
+      return args[0];
+    }, function returnMyValue() {
+      return 999;
+    }) as any;
+
+    expect(result).toEqual(999);
+  });
 });

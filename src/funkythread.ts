@@ -1,4 +1,4 @@
-import { isFunction, valueToNode } from '@babel/types';
+import { isArrowFunctionExpression, isFunction, isFunctionExpression, valueToNode } from '@babel/types';
 import { isObject, isPrimitive } from 'util';
 import { Worker } from 'worker_threads';
 
@@ -47,7 +47,8 @@ function buildArgs(args: any[]): any[] {
   const ret = [];
   for (const arg of args) {
     ret.push(JSON.stringify(arg, (key, value) => {
-      if (isFunction(value)) {
+      // TODO: this will pass a primitive or object, but not a function!
+      if (value.toString().includes('function')) {
         return value.toString();
       } else {
         return value;
