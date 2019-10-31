@@ -40,7 +40,7 @@ describe('Funkythread Library', () => {
   });
 
   it('should parse args correctly and pass them into the run function', async () => {
-    const result = await runFunctionAsThread(function run(args: any[]) {
+    const result = await runFunctionAsThread(function run(...args: any[]) {
       return args[0];
     }, 456) as any;
 

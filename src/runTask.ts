@@ -9,7 +9,7 @@ export async function runTask() {
   // encapsulate the function scope to effective rename the function to run
   return await (async () => {
     // note: syntax/logic errors with user function will show up as this line.
-    const run = new Function(`return (${workerData.fn})(${args})`) as any;
+    const run = new Function(`return (${workerData.fn})(${args.join(',')})`) as any;
     const result = await run();
     return await buildResponse(result);
   })();
