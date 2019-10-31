@@ -6,6 +6,8 @@ A simple library for running a CPU-intensive sync function inside a worker threa
 
 ## Installation and Usage
 
+**This module requires that you use v13.0.1+ to leverage the currently experimental features of worker threads.**
+
 ### Installation
 ```
 npm install funkythreads
