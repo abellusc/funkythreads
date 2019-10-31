@@ -19,7 +19,7 @@
   "files": [
     "package.json",
     "package-lock.json",
-    "./lib"
+    "./lib/*"
   ],
   "keywords": [
     "threads",
