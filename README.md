@@ -50,8 +50,6 @@ console.log(result); // 123
 
 4. Worker thread has no shared memory with the main thread. This effectively means that you cannot `require` something in the main thread and import it into the worker thread. This library is intended for pure functions without external dependencies.
 
-5. You cannot pass functions across the `MessagePort` (from main to worker or worker to main). Functionality for passing more functions other than the run function will be added in a future release. For now, this is a very basic library.
-
 ## Contributing
 If you would like to contribute to this project, feel free to do so on Github by:
 1. Creating a fork;
