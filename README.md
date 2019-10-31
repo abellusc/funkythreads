@@ -1,4 +1,7 @@
 # funkythreads
+
+[![CircleCI](https://circleci.com/gh/digitalkitten/funkythreads.svg?style=svg)](https://circleci.com/gh/digitalkitten/funkythreads) [![npm version](https://badge.fury.io/js/funkythreads.svg)](https://badge.fury.io/js/funkythreads) 
+
 A simple library for running a CPU-intensive sync function inside a worker thread without having to create a module. This library leverages dynamic code evaluation (via `new Function`) to allow you to pass a function and have it dynamically evaluated inside another thread. All evaluation logic happens inside the other thread, so there is little performance loss.
 
 ## Installation and Usage
@@ -9,7 +12,7 @@ npm install funkythreads
 ```
 To use this library, import `funkythreads`:
 
->= ES6:
+\>= ES6:
 ```js
 import * as funkythreads from 'funkythreads'
 ```
