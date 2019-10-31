@@ -1,6 +1,6 @@
 {
   "name": "funkythreads",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Runs a function as a worker thread.",
   "main": "lib/index.js",
   "scripts": {
