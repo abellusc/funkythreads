@@ -16,11 +16,6 @@
       "pre-commit": "npm run lint"
     }
   },
-  "files": [
-    "package.json",
-    "package-lock.json",
-    "./lib/*"
-  ],
   "keywords": [
     "threads",
     "worker_threads",
