@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "lint": "tslint ./src/*",
-    "pretest": "npm run build",
+    "pretest:unit": "npm run build",
     "test:unit": "jest",
     "prebuild": "rimraf ./lib",
     "build": "tsc -p .",
@@ -16,6 +16,11 @@
       "pre-commit": "npm run lint"
     }
   },
+  "files": [
+    "package.json",
+    "package-lock.json",
+    "./lib"
+  ],
   "keywords": [
     "threads",
     "worker_threads",
@@ -39,5 +44,6 @@
     "tslint": "^5.20.0",
     "typescript": "^3.6.4"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "repository": "https://github.com/digitalkitten/funkythreads"
 }
