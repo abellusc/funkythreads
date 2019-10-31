@@ -8,7 +8,9 @@ import { Worker } from 'worker_threads';
 export async function runFunctionAsThread(fn: (...params: any[]) => any | Promise<any>, args?: any[]) {
   return await new Promise((resolve, reject) => {
     const worker = new Worker(require.resolve('./runTask'), { workerData: { fn: fn.toString(), args } });
-    worker.on('message', (result) => resolve(new Function(`'use strict'; return (${result})`)()())); // return value is boxed in a function
+    worker.on('message', (result) => (
+      resolve(new Function(`'use strict'; return (${result})`)()())),
+    ); // return value is boxed in a function
     worker.on('error', reject);
   });
 }
